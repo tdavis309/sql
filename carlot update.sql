@@ -1,0 +1,72 @@
+-- TABLE FOR CUSTOMER
+create table CUSTOMER (
+	customer_id SERIAL primary key,
+	FIRST_NAME VARCHAR (100),
+	LAST_NAME VARCHAR (100),
+	EMAIL VARCHAR(200),
+	ADDRESS VARCHAR(200),
+	CITY VARCHAR(150),
+	CUSTOMER_STATE VARCHAR (100),
+	ZIPCODE VARCHAR(50)
+	
+);
+
+create table Sales_person(
+		seller_id SERIAL primary key,
+		FIRST_NAME VARCHAR(150),
+		LAST_NAME VARCHAR(150),
+		PHONE_NUMBER VARCHAR(10),
+		EMAIL VARCHAR (150)
+		);
+	
+create table CAR(
+		CAR_ID SERIAL primary key,
+		MAKE VARCHAR(20),
+		MODEL VARCHAR (20),
+		YR INTEGER 
+);
+
+
+create table MECHANIC (
+		MECHANIC_ID SERIAL primary KEY,
+		FIRST_NAME VARCHAR (150),
+		LAST_NAME VARCHAR (150),
+		PHONE_NUMBER VARCHAR(10)
+);
+
+CREATE TABLE INVOICE (
+    INVOICE_NUM SERIAL PRIMARY KEY,
+    CAR_ID INT,
+    CUSTOMER_ID INT,
+    SELLER_ID INT,
+    FOREIGN KEY (CAR_ID) REFERENCES CAR(CAR_ID),
+    FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER(CUSTOMER_ID),
+    FOREIGN KEY (SELLER_ID) REFERENCES SALES_PERSON(SELLER_ID)
+);
+
+
+CREATE TABLE SERVICE_HISTORY (
+    SERVICE_NUM SERIAL PRIMARY KEY,
+    MECHANIC_ID INT,
+    CAR_ID INT,
+    PARTS_ORDERED VARCHAR(250),
+    FOREIGN KEY (MECHANIC_ID) REFERENCES MECHANIC(MECHANIC_ID),
+    FOREIGN KEY (CAR_ID) REFERENCES CAR(CAR_ID)
+);
+select * from car 
+
+alter table service_history 
+drop column mechanic_id,
+drop column car_id;
+
+select * from service_history 
+
+create table service_ticket(
+	serv_tic_id SERIAL primary key,
+	MECHANIC_ID INT,
+	CAR_ID INT,
+	SERV_DATE DATE,
+	foreign key (MECHANIC_ID) references MECHANIC(MECHANIC_ID),
+	foreign key (CAR_ID) references CAR(CAR_ID)
+);
+
